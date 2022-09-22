@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Flip();
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
     }
 
     private void FixedUpdate()
