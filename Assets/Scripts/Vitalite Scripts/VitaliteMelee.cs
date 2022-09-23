@@ -10,6 +10,8 @@ public class VitaliteMelee : MonoBehaviour
     public float attackRange = 0.05f;
     public LayerMask enemyLayers;
 
+    public int attackDamage = 40;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,7 @@ public class VitaliteMelee : MonoBehaviour
         //Damage enemies
         foreach(Collider2D enemy in hitEnemies)
         {
-            Debug.Log("We hit " + enemy.name);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
     }
 
