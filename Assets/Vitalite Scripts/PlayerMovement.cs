@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    private float speed = 8f;
-    public float jumpingPower = 16f; //private float jumpingPower = 16f;
+    public float speed = 8f;
+    public float jumpingPower = 16f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+
+            animator.SetBool("IsJumping", true);
         }
 
         if (Input.GetButtonDown("Jump") && rb.velocity.y > 0f)
@@ -39,6 +41,17 @@ public class PlayerMovement : MonoBehaviour
         Flip();
 
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+        if (rb.velocity.y == 0f)
+        {
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsFalling", false);
+        }
+
+        if (rb.velocity.y != 0 && !animator.GetBool("IsJumping"))
+        {
+            animator.SetBool("IsFalling", true);
+        }
     }
 
     private void FixedUpdate()
