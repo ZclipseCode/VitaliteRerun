@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsFalling", false);
         }
 
-        if (rb.velocity.y != 0 && !animator.GetBool("IsJumping"))
+        if (rb.velocity.y != 0 && !animator.GetBool("IsJumping") && !IsGrounded())
         {
             animator.SetBool("IsFalling", true);
         }
